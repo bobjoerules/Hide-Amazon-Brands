@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Blocked Brands</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                padding: 10px;
+                width: 250px;
+                background-color: #222222;
+                color: white;
+                border-radius: 16px;
+            }
+            textarea {
+                width: 250px;
+                height: 120px;
+                resize: none;
+            }
+            button {
+                margin-top: 8px;
+                padding: 6px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h3 style="text-align: center;"><img id="icon" src="icon.png" width="20" height="auto" style="vertical-align: middle;"> Blocked Brands On Amazon</h3>
+        <textarea id="brands"></textarea>
+        <div style="display:flex; width: 256px;">
+            <button style="flex:1; background: #ff9900;" id="save">Save</button>
+            <button style="margin-left:5px; margin-right:none; width:30px; background: #555555; color: white;" id="mode">☀️</button>
+        </div>
+        <script src="popup.js"></script>
+    </body>
+</html>
