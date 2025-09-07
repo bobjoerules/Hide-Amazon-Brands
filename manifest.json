@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Hide Amazon Brands",
-  "version": "2.0",
-  "homepage_url": "https://bobjoerules.com",
+  "version": "3.0",
+  "homepage_url": "https://amazonbrandblock.bobjoerules.com",
   "description": "Hide Amazon-owned brands when browsing.",
   "action": {
     "default_popup": "popup.html",
@@ -12,7 +12,7 @@
       "128": "icon.png"
     }
   },
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage"],
   "content_scripts": [
     {
       "matches": ["*://www.amazon.com/*", "*://smile.amazon.com/*"],
@@ -24,9 +24,7 @@
     "gecko": {
       "id": "blocked-amazon-brands@example.com",
       "strict_min_version": "109.0",
-      "data_collection_permissions": {
-        "required": ["none"]
-      }
+      "permissions": ["tabs"]
     }
   }
 }

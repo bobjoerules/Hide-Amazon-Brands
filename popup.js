@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const saveBtn = document.getElementById("save");
     const modeBtn = document.getElementById("mode");
     const iconImg = document.getElementById("icon");
+    const blockedAmount = document.getElementById("blockedAmount");
     let mode;
 
     api.storage.sync.get("blockedBrands")
@@ -43,6 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(console.error);
 
+
+    api.storage.sync.get("blocked")
+        .then((data) => {
+        blockedAmount.textContent = data.blocked
+        })
+        .catch(console.error);
     saveBtn.addEventListener("click", () => {
         const brands = textarea.value
         .split("\n")

@@ -9,7 +9,7 @@ const defaultBrands = [
 ];
 
 const api = (typeof browser !== "undefined") ? browser : chrome;
-
+let blocked = 0
 let blockedBrands = [];
 
 api.storage.sync.get("blockedBrands")
@@ -22,18 +22,23 @@ api.storage.sync.get("blockedBrands")
   .catch(console.error);
 
 function hideAmazonBrands() {
-    const items = document.querySelectorAll("span, div, a");
-    items.forEach(el => {	
-        if (el.innerText) {
-            const text = el.innerText.toLowerCase();
-            if (blockedBrands.some(brand => text.includes(brand.toLowerCase()))) {
-                const product = el.closest("[data-asin], .s-result-item");
-                if (product) {
-                    product.style.display = "none";
-                }
+  blocked = 0
+  const items = document.querySelectorAll("span, div, a");
+  items.forEach(el => {	
+      if (el.innerText) {
+          const text = el.innerText.toLowerCase();
+          if (blockedBrands.some(brand => text.includes(brand.toLowerCase()))) {
+            const product = el.closest("[data-asin], .s-result-item");
+            if (product) {
+              product.style.display = "none";
+              blocked++
             }
-        }
-    });
+          }
+      }
+  });
+  api.storage.sync.set({ blocked: blocked })
+        .then(() => console.log("Blocked Amount saved:", blocked))
+        .catch(console.error);
 }
 
 const observer = new MutationObserver(hideAmazonBrands);
