@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const textarea = document.getElementById("brands");
     const saveBtn = document.getElementById("save");
     const modeBtn = document.getElementById("mode");
+    const toggleBtn = document.getElementById("toggle");
     const iconImg = document.getElementById("icon");
-    const blockedAmount = document.getElementById("blockedAmount");
     let mode;
 
     api.storage.sync.get("blockedBrands")
@@ -43,13 +43,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         })
         .catch(console.error);
-
-
-    api.storage.sync.get("blocked")
-        .then((data) => {
-        blockedAmount.textContent = data.blocked
-        })
-        .catch(console.error);
+    api.storage.sync.get("toggle")
+    .then((data) => {
+        toggle = data.toggle || "on";
+        if (toggle === 'on') {
+            toggleBtn.textContent = '👁️';
+        }else {
+            toggleBtn.textContent = '🚫';
+        }
+    })
+    .catch(console.error);
     saveBtn.addEventListener("click", () => {
         const brands = textarea.value
         .split("\n")
@@ -69,21 +72,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modeBtn.addEventListener("click", () => {
         if (mode === "darkmode") {
-        document.body.style.backgroundColor = "white";
-        document.body.style.color = "black";
-        iconImg.src = "icon.png";
-        mode = "lightmode";
-        modeBtn.textContent = '🌙';
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+            iconImg.src = "icon.png";
+            mode = "lightmode";
+            modeBtn.textContent = '🌙';
         } else {
-        document.body.style.backgroundColor = "#222222";
-        document.body.style.color = "white";
-        iconImg.src = "white icon.png";
-        mode = "darkmode";
-        modeBtn.textContent = '☀️';
+            document.body.style.backgroundColor = "#222222";
+            document.body.style.color = "white";
+            iconImg.src = "white icon.png";
+            mode = "darkmode";
+            modeBtn.textContent = '☀️';
         }
-
         api.storage.sync.set({ mode: mode })
         .then(() => console.log("Mode saved:", mode))
         .catch(console.error);
+    });
+    toggleBtn.addEventListener("click", () => {
+        if (toggle === 'on') {
+            toggle = 'off'
+            toggleBtn.textContent = '👁️';
+        }else {
+            toggle = 'on'
+            toggleBtn.textContent = '🚫';
+        }
+        api.storage.sync.set({ toggle: toggle })
+        .then(() => console.log("Toggle saved:", toggle))
+        .catch(console.error)
+        .then(() => api.tabs.query({ active: true, currentWindow: true }))
+        .then((tabs) => {
+            if (tabs[0]) {
+                api.tabs.reload(tabs[0].id);
+            }
+            window.close();
+        })
     });
 });

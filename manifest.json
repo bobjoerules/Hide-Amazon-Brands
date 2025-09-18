@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Hide Amazon Brands",
-  "version": "3.0",
+  "version": "4.0",
   "homepage_url": "https://amazonbrandblock.bobjoerules.com",
   "description": "Hide Amazon-owned brands when browsing.",
   "action": {
@@ -15,7 +15,7 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
-      "matches": ["*://www.amazon.com/*", "*://smile.amazon.com/*"],
+      "matches": ["*://www.amazon.com/*", "*://smile.amazon.com/*", "*://www.amazon.co.uk/*","*://www.amazon.ca/*","*://www.amazon.de/*","*://www.amazon.fr/*","*://www.amazon.in/*","*://www.amazon.it/*","*://www.amazon.es/*"],
       "js": ["content.js"],
       "run_at": "document_idle"
     }
