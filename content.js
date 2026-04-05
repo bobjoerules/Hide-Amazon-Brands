@@ -37,7 +37,7 @@ function hideAmazonBrands() {
       if (el.innerText) {
         const text = el.innerText.toLowerCase();
         if (blockedBrands.some(brand => text.includes(brand.toLowerCase()))) {
-          const product = el.closest("[data-asin], .s-result-item");
+          const product = el.closest("[data-asin], .s-result-item, li");
           if (product) {
             product.style.display = "none"
           }

@@ -33,12 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mode === "lightmode") {
             document.body.style.backgroundColor = "white";
             document.body.style.color = "black";
+            document.querySelector("textarea").style.backgroundColor = "white";
+            document.querySelector("textarea").style.color = "black";
             iconImg.src = "icon.png";
             modeBtn.textContent = '🌙';
         } else {
             document.body.style.backgroundColor = "#222222";
             document.body.style.color = "white";
-            iconImg.src = "white icon.png";
+            document.querySelector("textarea").style.backgroundColor = "#333333";
+            document.querySelector("textarea").style.color = "white";
+            iconImg.src = "white-icon.png";
             modeBtn.textContent = '☀️';
         }
         })
@@ -74,13 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mode === "darkmode") {
             document.body.style.backgroundColor = "white";
             document.body.style.color = "black";
+            document.querySelector("textarea").style.backgroundColor = "lightgrey";
+            document.querySelector("textarea").style.color = "black";
             iconImg.src = "icon.png";
             mode = "lightmode";
             modeBtn.textContent = '🌙';
         } else {
             document.body.style.backgroundColor = "#222222";
             document.body.style.color = "white";
-            iconImg.src = "white icon.png";
+            document.querySelector("textarea").style.backgroundColor = "#333333";
+            document.querySelector("textarea").style.color = "white";
+            iconImg.src = "white-icon.png";
             mode = "darkmode";
             modeBtn.textContent = '☀️';
         }
@@ -108,3 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     });
 });
+
+function titleCase(str) {
+   var splitStr = str.toLowerCase().split(' ');
+   for (var i = 0; i < splitStr.length; i++) {
+       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+   }
+   return splitStr.join(' '); 
+}
